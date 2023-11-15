@@ -1,0 +1,10 @@
+import cv2
+import numpy as np
+image = cv2.imread('arch.jpg')
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+blurred_image = cv2.GaussianBlur(gray_image, (0, 0), 3)
+sharpened_image = cv2.addWeighted(gray_image, 1.5, blurred_image, -1.75, 0)
+cv2.imshow('Original Image', gray_image)
+cv2.imshow('Sharpened Image (Unsharp Masking)', sharpened_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
