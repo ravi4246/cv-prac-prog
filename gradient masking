@@ -1,0 +1,14 @@
+import cv2
+import numpy as np
+image = cv2.imread('arch.jpg')
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+grad_x = cv2.Sobel(gray_image, cv2.CV_64F, 1, 0, ksize=3)
+grad_y = cv2.Sobel(gray_image, cv2.CV_64F, 0, 1, ksize=3)
+gradient_magnitude = np.sqrt(grad_x**2 + grad_y**2)
+gradient_magnitude = cv2.normalize(gradient_magnitude, None, 0, 255, cv2.NORM_MINMAX, cv2.CV_8U)
+mask = 230 - gradient_magnitude
+sharpened_image = cv2.addWeighted(image, 1.5, cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR), -0.5, 0)
+cv2.imshow('Original Image', image)
+cv2.imshow('Sharpened Image (Gradient Masking)', sharpened_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
