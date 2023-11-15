@@ -1,0 +1,12 @@
+import cv2
+image = cv2.imread("alpha.jpg")
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (10, 10))
+
+eroded1 = cv2.erode(gray, kernel, iterations=1)
+eroded2 = cv2.erode(gray, kernel, iterations=2)
+
+cv2.imshow("original image", image)
+cv2.imshow("Eroded 1 ieteration", eroded1)
+cv2.imshow("Eroded 2 iterations", eroded2)
+cv2.waitKey(0)
