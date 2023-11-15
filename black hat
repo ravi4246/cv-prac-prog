@@ -1,0 +1,17 @@
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+image = cv2.imread('alpha.jpg', cv2.IMREAD_GRAYSCALE)
+kernel = np.ones((5, 5), np.uint8) 
+
+black_hat_image = cv2.morphologyEx(image, cv2.MORPH_BLACKHAT, kernel)
+
+
+plt.subplot(1, 2, 1), plt.imshow(image, cmap='gray')
+plt.title('Original Image'), plt.xticks([]), plt.yticks([])
+
+plt.subplot(1, 2, 2), plt.imshow(black_hat_image, cmap='gray')
+plt.title('Black Hat Image'), plt.xticks([]), plt.yticks([])
+
+plt.show()
