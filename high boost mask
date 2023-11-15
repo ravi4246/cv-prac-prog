@@ -1,0 +1,14 @@
+import cv2
+import numpy as np
+image = cv2.imread('arch.jpg')
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+blurred_image = cv2.GaussianBlur(gray_image, (0, 0), 3)
+high_boost_mask = gray_image - blurred_image
+alpha = 2.0
+sharpened_image = gray_image + alpha * high_boost_mask
+sharpened_image = np.clip(sharpened_image, 0, 255)
+sharpened_image = sharpened_image.astype(np.uint8)
+cv2.imshow('Original Image', gray_image)
+cv2.imshow('Sharpened Image (High-Boost Mask)', sharpened_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
